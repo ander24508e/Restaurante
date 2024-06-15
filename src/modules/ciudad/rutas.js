@@ -1,13 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const respuesta = require('../../red/answer');
-const controlador = require('./controlador');
+const controlador = require('./controladorCity');
 
-// GET categorias
+// GET ciudades
 router.get('/', async function (req, res) {
     try {
-        const negocios = await controlador.getCiudad(); 
-        respuesta.success(req, res, negocios, 200);
+        const ciudad = await controlador.cityView(); 
+        respuesta.success(req, res, ciudad, 200);
+    } catch (err) {
+        respuesta.error(req, res, err, 500);
+    }
+});
+
+// POST ciudad
+router.post('/', async function (req, res) {
+    try {
+        const ciudad = await controlador.cityCreate(req.body); 
+        respuesta.success(req, res, ciudad, 200);
     } catch (err) {
         respuesta.error(req, res, err, 500);
     }

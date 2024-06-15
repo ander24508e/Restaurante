@@ -1,12 +1,12 @@
 const express = require('express');
-const router = express.Router();
 const respuesta = require('../../red/answer');
-const controlador = require('./controlador');
+const controlador = require('./controladorUsers');
+const router = express.Router();
 
 // GET users
 router.get('/', async function (req, res) {
     try {
-        const users = await controlador.getUsers();
+        const users = await controlador.usersView();
         respuesta.success(req, res, users, 200);
     } catch (err) {
         respuesta.error(req, res, err, 500);
@@ -14,26 +14,34 @@ router.get('/', async function (req, res) {
 });
 
 // POST users
-router.post('/', async function (req, res, body) {
+router.post('/', async function (req, res) {
     const userData = req.body;
     try {
-        await controlador.createUser(userData); // No es necesario devolver el ID en este caso
-        respuesta.success(req, res, body, { message: 'User created successfully' }, 201);
+        await controlador.createUsers(userData);
+        respuesta.success(req, res, { message: 'User created successfully' }, 201);
     } catch (err) {
         respuesta.error(req, res, err, 500);
     }
 });
 
-// GET user by cedula
-router.get('/:', async function (req, res) {
-    const { cedula } = req.params;
+// PUT user
+router.put('/', async function (req, res) {
+    const userData = req.body;
     try {
-        const user = await controlador.getUserByCedula(cedula);
-        if (user) {
-            respuesta.success(req, res, user, 200);
-        } else {
-            respuesta.error(req, res, 'User not found', 404);
-        }
+        await controlador.updateUser(userData);
+        respuesta.success(req, res, { message: 'User updated successfully' }, 200);
+    } catch (err) {
+        respuesta.error(req, res, err, 500);
+    }
+});
+
+// DELETE user
+router.delete('/:cedula', async function (req, res) {
+    const { cedula } = req.params;
+    const { password } = req.body;
+    try {
+        await controlador.deleteUser(cedula, password);
+        respuesta.success(req, res, { message: 'User deleted successfully' }, 200);
     } catch (err) {
         respuesta.error(req, res, err, 500);
     }

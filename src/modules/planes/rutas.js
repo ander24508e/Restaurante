@@ -1,25 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const respuesta = require('../../red/answer');
-const controlador = require('./controladorCategories');
+const controlador = require('./controladorPlan');
 
-// GET categorias
+// GET ciudades
 router.get('/', async function (req, res) {
     try {
-        const categorias = await controlador.categoriesView(); 
-        respuesta.success(req, res, categorias, 200);
+        const ciudad = await controlador.planView(); 
+        respuesta.success(req, res, ciudad, 200);
     } catch (err) {
         respuesta.error(req, res, err, 500);
     }
 });
 
-// POST categorias
+// POST ciudad
 router.post('/', async function (req, res) {
     try {
-        const categorias = await controlador.categoriesCreate(req.body); 
-        respuesta.success(req, res, categorias, 200);
+        const ciudad = await controlador.planCreate(req.body); 
+        respuesta.success(req, res, ciudad, 200);
     } catch (err) {
         respuesta.error(req, res, err, 500);
     }
 });
+
 module.exports = router;

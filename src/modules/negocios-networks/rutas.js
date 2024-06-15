@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const respuesta = require('../../red/answer');
-const controlador = require('./controlador');
+const controlador = require('./controladorNetworks');
 
 // GET categorias
 router.get('/', async function (req, res) {
