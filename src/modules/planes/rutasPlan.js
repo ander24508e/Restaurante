@@ -3,21 +3,21 @@ const router = express.Router();
 const respuesta = require('../../red/answer');
 const controlador = require('./controladorPlan');
 
-// GET ciudades
+// GET Plan
 router.get('/', async function (req, res) {
     try {
-        const ciudad = await controlador.planView(); 
-        respuesta.success(req, res, ciudad, 200);
+        const plan = await controlador.planView(); 
+        respuesta.success(req, res, plan, 200);
     } catch (err) {
         respuesta.error(req, res, err, 500);
     }
 });
 
-// POST ciudad
+// POST Plan
 router.post('/', async function (req, res) {
     try {
-        const ciudad = await controlador.planCreate(req.body); 
-        respuesta.success(req, res, ciudad, 200);
+        const plan = await controlador.planCreate(req.body); 
+        respuesta.success(req, res, plan, 200);
     } catch (err) {
         respuesta.error(req, res, err, 500);
     }

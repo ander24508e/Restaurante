@@ -10,16 +10,16 @@ function planView(table) {
 }
 
 const planCreate = async (body) => {
-    const { planName, planPrice } = body;
-    console.log(planName, planPrice);
-    
+    const { planName, planPrice, planMenus, planProducts, planBusiness, planReservations } = body;
+    console.log(planName, planPrice, planMenus, planProducts, planBusiness, planReservations);
+
     return new Promise((resolve, reject) => {
         pool.query(
-            `INSERT INTO plans (plan_name, plan_price) VALUES (?, ?)`,
-            [ planName, planPrice],
+            `INSERT INTO plans (plan_name, plan_price, max_menus, max_products, max_businesses, max_reservations) VALUES (?, ?, ?, ?, ?, ?)`,
+            [planName, planPrice, planMenus, planProducts, planBusiness, planReservations],
             (error, results) => {
                 if (error) {
-                    console.log('Error al insertar datos:', error);
+                    console.log('Error al crear plan:', error);
                     return reject(error);
                 }
                 resolve({ message: "Plan created successfully" });

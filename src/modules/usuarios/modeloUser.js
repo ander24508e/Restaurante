@@ -39,9 +39,9 @@ const updateUser = async (body) => {
 };
 
 // Eliminar usuario
-const deleteUser = async (userCed, userPass) => {
+const deleteUser = async (cedula, password) => {
     return new Promise((resolve, reject) => {
-        pool.query('CALL delete_user(?, ?)', [userCed, userPass], (error, results) => {
+        pool.query('CALL delete_user(?, ?)', [cedula, password], (error, results) => {
             if (error) {
                 reject(error);
             } else {
@@ -56,4 +56,4 @@ module.exports = {
     createUsers,
     updateUser,
     deleteUser
-};
+}

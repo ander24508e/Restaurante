@@ -25,10 +25,10 @@ router.post('/', async function (req, res) {
 });
 
 // PUT user
-router.put('/', async function (req, res) {
-    const userData = req.body;
+router.put('/:cedula', async function (req, res) {
+    const { userName, userCed, userPhone, userMail, cityName, userUrl, userPlan, userDirec, userPass } = req.body;
     try {
-        await controlador.updateUser(userData);
+        await controlador.updateUser( userName, userCed, userPhone, userMail, cityName, userUrl, userPlan, userDirec, userPass );
         respuesta.success(req, res, { message: 'User updated successfully' }, 200);
     } catch (err) {
         respuesta.error(req, res, err, 500);
@@ -41,7 +41,7 @@ router.delete('/:cedula', async function (req, res) {
     const { password } = req.body;
     try {
         await controlador.deleteUser(cedula, password);
-        respuesta.success(req, res, { message: 'User deleted successfully' }, 200);
+        respuesta.success(req, res, { message: 'Usuario deleted successfully' }, 200);
     } catch (err) {
         respuesta.error(req, res, err, 500);
     }

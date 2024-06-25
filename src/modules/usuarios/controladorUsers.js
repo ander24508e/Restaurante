@@ -25,9 +25,9 @@ async function updateUser(body) {
     }
 }
 
-async function deleteUser(userCed, userPass) {
+async function deleteUser(cedula, password) {
     try {
-        return await db.deleteUser(userCed, userPass);
+        return await db.deleteUser(cedula, password);
     } catch (error) {
         throw error;
     }

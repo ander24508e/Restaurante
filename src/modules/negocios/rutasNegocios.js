@@ -25,7 +25,7 @@ router.post('/', async function (req, res) {
 });
 
 // PUT (Actualizar) negocios
-router.put('/', async function (req, res) {
+router.put('/:businessId', async function (req, res) {
     const { businessId } = req.params;
     const businessData = req.body;
     try {
