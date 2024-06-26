@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const respuesta = require('../../red/answer');
+const respuesta = require('../../DB/answer');
 const controlador = require('./controladorPlan');
 
 // GET Plan
