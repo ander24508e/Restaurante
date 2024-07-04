@@ -21,30 +21,30 @@ app.use(express.json());
 app.set('port', config.app.port);
 
 // Rutas - Usuarios
-app.use('/users', usuarios);
+app.use('/restaurant/users', usuarios);
 
 // Rutas - Productos
-app.use('/products', productos);
+app.use('/restaurant/products', productos);
 
 // Rutas - Plans
-app.use('/plan', plans);
+app.use('/restaurant/plan', plans);
 
 // Rutas - Negocios
-app.use('/businesses', negocios);
+app.use('/restaurant/businesses', negocios);
 
 //Rutas - Negocios Redes Sociales
-app.use('/businessesNetworks', negociosNetworks);
+app.use('/restaurant/businessesNetworks', negociosNetworks);
 
 // Rutas - Categorias
-app.use('/category', categorias);
+app.use('/restaurant/category', categorias);
 
 //Rutas - Menu 
-app.use('/menu', menu)
+app.use('/restaurant/menu', menu)
 
 //Rutas - Menu Productos
-app.use('/menuproducts', menuProducts)
+app.use('/restaurant/menuproducts', menuProducts)
 
 //Rutas Ciudades
-app.use('/city', ciudad);
+app.use('/restaurant/city', ciudad);
 
 module.exports = app;
