@@ -7,6 +7,9 @@ const productos = require('./modules/productos/rutasProductos');
 const negocios = require('./modules/negocios/rutasNegocios');
 const negociosNetworks = require('./modules/negocios-networks/rutasNetworks');
 const categorias = require('./modules/categorias/rutasCategory');
+const reservacion = require('./modules/reservaciones/rutasReservations');
+const reservation_places = require('./modules/reservacion-places/rutasReservationsPlaces');
+const reservation_details = require('./modules/reservacion-details/rutasReservationDetails');
 const menu = require('./modules/menu/rutasMenu');
 const menuProducts = require('./modules/menu-products/rutasMenuProducts');
 const ciudad = require('./modules/ciudad/rutasCity');
@@ -36,7 +39,7 @@ app.use('/restaurant/businesses', negocios);
 app.use('/restaurant/businessesNetworks', negociosNetworks);
 
 // Rutas - Categorias
-app.use('/restaurant/category', categorias);
+app.use('/restaurant/categories', categorias);
 
 //Rutas - Menu 
 app.use('/restaurant/menu', menu)
@@ -45,6 +48,15 @@ app.use('/restaurant/menu', menu)
 app.use('/restaurant/menuproducts', menuProducts)
 
 //Rutas Ciudades
-app.use('/restaurant/city', ciudad);
+app.use('/restaurant/cities', ciudad);
+
+//Rutas - Reservaciones
+app.use('/restaurant/reservations', reservacion);
+
+// Rutas - Reservaciones Lugares
+app.use('/restaurant/reservation-places', reservation_places);
+
+//Rutas - Reservaciones con detalles
+app.use('/restaurant/reservations-details', reservation_details);
 
 module.exports = app;
