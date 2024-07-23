@@ -7,7 +7,7 @@ function usersView() {
     return new Promise((resolve, reject) => {
         pool.query(`CALL get_all_users()`, (error, result) => {
             if (error) return reject(error);
-            resolve(result[0]); // Adjusted to return the first result set
+            resolve(result[0]);
         });
     });
 }

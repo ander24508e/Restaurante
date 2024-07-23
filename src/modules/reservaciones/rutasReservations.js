@@ -3,49 +3,54 @@ const router = express.Router();
 const respuesta = require('../../DB/answer');
 const controlador = require('./controladorReservation');
 
-// GET productos
-router.get('/', async function (req, res) {
+// GET reservaciones
+router.get('/:businessId', async function (req, res) {
+    const businessId = req.params.businessId;
+    if (!businessId) {
+        return respuesta.error(req, res, { message: 'businessId is required' }, 400);
+    }
     try {
-        const productos = await controlador.ReservationView();
-        respuesta.success(req, res, productos, 200);
+        const reservations = await controlador.ReservationView(businessId);
+        respuesta.success(req, res, reservations, 200);
     } catch (err) {
         respuesta.error(req, res, err, 500);
     }
 });
 
-// POST productos
+// POST reservaciones
 router.post('/', async function (req, res) {
-    const productData = req.body;
+    const reservationData = req.body;
     try {
-        await controlador.ReservationCreate(productData);
-        respuesta.success(req, res, { message: 'Reservation created successfully' }, 201);
+        const result = await controlador.ReservationCreate(reservationData);
+        respuesta.success(req, res, result, 201);
     } catch (err) {
         respuesta.error(req, res, err, 500);
     }
 });
 
-// PUT productos
-router.put('/:productId', async function (req, res) {
-    const productId = req.params.productId;
-    const productData = req.body;
+// PUT reservaciones
+router.put('/:reservationId', async function (req, res) {
+    const reservationId = req.params.reservationId;
+    const reservationDataData = req.body;
     try {
-        await controlador.ReservationUpdate(productId, productData);
+        await controlador.ReservationUpdate(reservationId, reservationDataData);
         respuesta.success(req, res, { message: 'Reservation updated successfully' }, 200);
     } catch (err) {
         respuesta.error(req, res, err, 500);
     }
 });
 
-// DELETE producto
-router.delete('/:productId', async function (req, res) {
-    const productId = req.params.productId;
-    const { businessId, businessOwnerCed, password } = req.body;
+// DELETE reservaciones
+router.delete('/:reservationId', async function (req, res) {
+    const reservationId = req.params.reservationId;
+    const { businessId } = req.body;
     try {
-        await controlador.ReservationDelete(productId, { businessId, businessOwnerCed, password });
+        await controlador.ReservationDelete(reservationId, businessId);
         respuesta.success(req, res, { message: 'Reservation deleted successfully' }, 200);
     } catch (err) {
         respuesta.error(req, res, err, 500);
     }
 });
+
 
 module.exports = router;

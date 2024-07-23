@@ -1,9 +1,9 @@
 const db = require('./modeloReservation');
 
-async function ReservationView() {
+async function ReservationView(businessId) { 
     try {
-        const productos = await db.ReservationView();
-        return productos;
+        const reservations = await db.ReservationView(businessId);
+        return reservations;
     } catch (error) {
         throw error;
     }
@@ -11,27 +11,26 @@ async function ReservationView() {
 
 async function ReservationCreate(body) {
     try {
-        const productos = await db.ReservationCreate(body);
-        return productos;
+        const reservations = await db.ReservationCreate(body);
+        return reservations;
     } catch (error) {
         throw error;
     }
 }
 
-async function ReservationUpdate(productId, body) {
+async function ReservationUpdate(reservationId, body) {
     try {
-        const productos = await db.ReservationUpdate(productId, body);
-        return productos;
+        const reservations = await db.ReservationUpdate(reservationId, body);
+        return reservations;
     } catch (error) {
         throw error;
     }
 }
 
-async function ReservationDelete(productId, body) {
-    const { businessId, businessOwnerCed, password } = body;
+async function ReservationDelete(reservationId, businessId) {
     try {
-        const productos = await db.ReservationDelete(productId, businessId, businessOwnerCed, password);
-        return productos;
+        const reservations = await db.ReservationDelete(reservationId, businessId);
+        return reservations;
     } catch (error) {
         throw error;
     }
